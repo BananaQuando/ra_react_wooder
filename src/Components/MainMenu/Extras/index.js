@@ -9,7 +9,8 @@ export default class Extras extends Component {
         let languages = [
             "United Kingdom",
             "Italy",
-            "Portugaly"
+            "Portugaly",
+            "sa_lox"
         ];
 
         return (
