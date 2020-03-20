@@ -4,6 +4,7 @@ import 'react-tippy/dist/tippy.css';
 import {Tooltip} from 'react-tippy';
 
 export default class Extras extends Component {
+
     render(){
 
         let languages = [
@@ -21,7 +22,6 @@ export default class Extras extends Component {
                 <div className="language">
                     <Tooltip 
                         className="language__selected"
-                        hideOnClick='true'
                         trigger="click"
                         interactive
                         position="bottom-end"

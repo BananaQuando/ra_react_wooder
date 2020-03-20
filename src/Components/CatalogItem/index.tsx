@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import ContextItem from '../ContextItem';
 
-export default class CatalogItem extends Component {
+interface Props {
+    inverse?: string,
+}
+
+export default class CatalogItem extends Component <Props>{
 
     render(){
         const { inverse } = this.props;

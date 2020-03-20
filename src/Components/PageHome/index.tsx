@@ -4,9 +4,22 @@ import CatalogBlock from '../CatalogBlock';
 import AdvantagesBlock from '../AdvantagesBlock';
 import VideoBlock from '../VideoBlock';
 import AboutUsBlock from '../AboutUsBlock';
+import { IPageStore } from '../../Stores/PageStore';
+import { observer, inject } from 'mobx-react';
 
-export default class PageHome extends Component {
+interface Props {
+    pagesStore: IPageStore
+}
+
+@inject('pageStore')
+@observer
+class PageHome extends Component <Props> {
+    
     render() {
+        
+        // const {} = this.props.pagesStore
+
+        console.log(this.props);
         return (
             <>
                 <Slider />
@@ -18,3 +31,5 @@ export default class PageHome extends Component {
         );
     }
 }
+
+export default PageHome;

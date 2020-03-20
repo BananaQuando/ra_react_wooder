@@ -1,9 +1,14 @@
 import React, {Component} from 'react';
 
-export default class Languages extends Component {
+interface Props {
+    languages?: any[];
+}
+
+export default class Languages extends Component <Props>{
 
     render() {
         const LangugaesArray = this.props.languages;
+        if (LangugaesArray === undefined) return;
         const listLanguages = LangugaesArray.map((language) =>
             <li>
                 <a href="#">

@@ -2,7 +2,12 @@ import React, {Component} from 'react';
 import Slick from 'react-slick';
 import CustomSlide from './CustomSlide';
 
-export default class Slider extends Component {
+interface Props {
+    slider1: any,
+    slider2: any, 
+}
+
+export default class Slider extends Component <Props>{
 
     constructor(props) {
         super(props);
@@ -14,8 +19,8 @@ export default class Slider extends Component {
 
     componentDidMount() {
         this.setState({
-            nav1: this.slider1,
-            nav2: this.slider2
+            nav1: this.props.slider1,
+            nav2: this.props.slider2
         });
     }
 
@@ -34,6 +39,10 @@ export default class Slider extends Component {
                     </ul>
                 </div>
             ),
+            beforeChange: (current, next) => {
+                if (document === null) return;
+                document.querySelector('.slider__number').innerHTML = '0' + Number(next + 1);
+            },
             dotsClass: 'slider__navigation',
             asNavFor: this.state.nav2,
             autoplay: true,
@@ -42,9 +51,6 @@ export default class Slider extends Component {
             autoplaySpeed: 4000,
             slidesToShow: 1,
             slidesToScroll: 1,
-            beforeChange: (current, next) => {
-                document.querySelector('.slider__number').innerHTML = '0' + Number(next + 1);
-            }
         }
         const settings__right = {
             infinite: true,
@@ -77,7 +83,7 @@ export default class Slider extends Component {
                 <Slick
                     className="slider__block-one"
                     {...settings__left}
-                    ref={slider => (this.slider1 = slider)}
+                    ref={slider => (this.props.slider1 = slider)}
                 >
                     <CustomSlide image="img/slider__item-1.jpg" />
                     <CustomSlide image="img/slider__item-1.jpg" />
@@ -86,7 +92,7 @@ export default class Slider extends Component {
                 <Slick
                     className="slider__block-two"
                     {...settings__right}
-                    ref={slider => (this.slider2 = slider)}
+                    ref={slider => (this.props.slider2 = slider)}
                 >
                     <CustomSlide image="img/slider__item-2.jpg" />
                     <CustomSlide image="img/slider__item-2.jpg" />

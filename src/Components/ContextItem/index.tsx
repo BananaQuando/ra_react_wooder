@@ -1,8 +1,12 @@
 import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
 
-export default class ContextItem extends Component {
+interface Props {
+    buttonClass?: string,
+    blockClass?: string,
+}
 
+export default class ContextItem extends Component <Props>{
     
     render(){
         const { blockClass, buttonClass } = this.props;

@@ -1,15 +1,12 @@
 import React, {Component} from 'react';
-import Languages from './Languages';
 import SlidedownMenu from './SlidedownMenu';
 import Menu from './Menu';
 import Extras from './Extras';
 
 export default class MainMenu extends Component {
-
     OpenSlidedownMenu(){
-        const hamburger = document.querySelector('.hamburger');
         const body = document.querySelector('body');
-    
+        if (body === null) return;
         body.classList.toggle("menu-open");
     }
 
