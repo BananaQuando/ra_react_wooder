@@ -26,6 +26,6 @@ class PageStore implements IPageStore{
     }
 }
 
-const pageStore = new PageStore();
+// const pageStore = new PageStore();
 
-export default pageStore;
+export default PageStore;

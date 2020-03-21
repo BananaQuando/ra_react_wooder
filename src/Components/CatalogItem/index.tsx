@@ -3,14 +3,15 @@ import ContextItem from '../ContextItem';
 
 interface Props {
     inverse?: string,
+    postId?: number,
 }
 
-export default class CatalogItem extends Component <Props>{
+export default class CatalogItem extends Component<Props>{
 
-    render(){
+    render() {
         const { inverse } = this.props;
-        return(
-            <div className={`catalog-item ${ inverse ? inverse : ''}` }>
+        return (
+            <div className={`catalog-item ${inverse ? inverse : ''}`}>
                 <div className="catalog-item__content">
                     <ContextItem buttonClass="button_light" />
                     <div className="catalog-item__number">

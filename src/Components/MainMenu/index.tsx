@@ -13,13 +13,6 @@ interface Props {
 @observer
 export default class MainMenu extends Component<Props>{
 
-    componentDidUpdate(prevProps) {
-        console.log(`
-            prevProps: ${prevProps}
-            props: ${this.props}
-        `);
-    }
-
     OpenSlidedownMenu() {
         const body = document.querySelector('body');
         if (body === null) return;
