@@ -1,10 +1,11 @@
 import {observable} from 'mobx';
 
 export interface IPageStore {
-    pathname: string,
-    search: string,
-    hash: string,
-    state: string,
+    pathname ?: string,
+    search   ?: string,
+    hash     ?: string,
+    state    ?: string,
+    setData  ?: Function,
 }
 
 class PageStore implements IPageStore{
@@ -13,7 +14,7 @@ class PageStore implements IPageStore{
     @observable hash;
     @observable state;
 
-    setData(data){
+    public setData(data: any){
         if (data.pathname)
             this.pathname = data.pathname;
         if (data.search)

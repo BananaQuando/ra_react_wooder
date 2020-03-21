@@ -1,9 +1,9 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import ContextItem from '../ContextItem';
 
 export default class VideoBlock extends Component {
-    render(){
-        return(
+    render() {
+        return (
             <div className="video-block">
                 <div className="video-block__background">
                     <img src="img/video-image.png" alt="" />

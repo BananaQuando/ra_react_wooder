@@ -1,6 +1,7 @@
 import { RouteProps } from 'react-router';
 import React, {Component} from 'react';
-import CatalogItem from '../CatalogItem';
+import AboutUsBlock from '../AboutUsBlock';
+import GoogleMap from '../GoogleMap';
 import { IPageStore } from '../../Stores/PageStore';
 import { observer, inject } from 'mobx-react';
 
@@ -10,7 +11,7 @@ interface Props {
 
 @inject('pageStore')
 @observer
-export default class PageCatalog extends Component<Props & RouteProps> {
+export default class PageAbout extends Component<Props & RouteProps> {
 
     componentDidMount(){
         const pageData = {
@@ -25,13 +26,10 @@ export default class PageCatalog extends Component<Props & RouteProps> {
     render(){
         
         return(
-            <div className="catalog-block">
-                <CatalogItem />
-                <CatalogItem inverse="catalog-item--inverse"/>
-                <CatalogItem />
-                <CatalogItem inverse="catalog-item--inverse"/>
-                <CatalogItem />
-            </div>
+            <>
+                <AboutUsBlock />
+                <GoogleMap />
+            </>
         );
     }
 }

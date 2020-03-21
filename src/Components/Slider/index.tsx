@@ -2,12 +2,17 @@ import React, {Component} from 'react';
 import Slick from 'react-slick';
 import CustomSlide from './CustomSlide';
 
-interface Props {
-    slider1: any,
-    slider2: any, 
-}
+// interface Props {
+//     slider1: any,
+//     slider2: any, 
+//     nav1: any, 
+//     nav2: any, 
+// }
 
-export default class Slider extends Component <Props>{
+export default class Slider extends Component{
+
+    private slider1?: any;
+    private slider2?: any;
 
     constructor(props) {
         super(props);
@@ -19,8 +24,8 @@ export default class Slider extends Component <Props>{
 
     componentDidMount() {
         this.setState({
-            nav1: this.props.slider1,
-            nav2: this.props.slider2
+            nav1: this.slider1,
+            nav2: this.slider2
         });
     }
 
@@ -40,11 +45,11 @@ export default class Slider extends Component <Props>{
                 </div>
             ),
             beforeChange: (current, next) => {
-                if (document === null) return;
                 document.querySelector('.slider__number').innerHTML = '0' + Number(next + 1);
             },
             dotsClass: 'slider__navigation',
-            asNavFor: this.state.nav2,
+            // asNavFor: this.state.nav2,
+            asNavFor: this.slider2,
             autoplay: true,
             cssEase: 'ease-in-out',
             speed: 800,
@@ -57,7 +62,8 @@ export default class Slider extends Component <Props>{
             vertical: true,
             arrows: false,
             dots: false,
-            asNavFor: this.state.nav1,
+            // asNavFor: this.state.nav1,
+            asNavFor: this.slider1,
             // autoplay: true,
             cssEase: 'ease-in-out',
             speed: 500,
@@ -83,7 +89,7 @@ export default class Slider extends Component <Props>{
                 <Slick
                     className="slider__block-one"
                     {...settings__left}
-                    ref={slider => (this.props.slider1 = slider)}
+                    ref={slider => (this.slider1 = slider)}
                 >
                     <CustomSlide image="img/slider__item-1.jpg" />
                     <CustomSlide image="img/slider__item-1.jpg" />
@@ -92,7 +98,7 @@ export default class Slider extends Component <Props>{
                 <Slick
                     className="slider__block-two"
                     {...settings__right}
-                    ref={slider => (this.props.slider2 = slider)}
+                    ref={slider => (this.slider2 = slider)}
                 >
                     <CustomSlide image="img/slider__item-2.jpg" />
                     <CustomSlide image="img/slider__item-2.jpg" />

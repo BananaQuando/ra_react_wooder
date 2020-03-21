@@ -1,4 +1,5 @@
-import React, {Component} from 'react';
+import { RouteProps } from 'react-router';
+import React, { Component } from 'react';
 import Slider from '../Slider';
 import CatalogBlock from '../CatalogBlock';
 import AdvantagesBlock from '../AdvantagesBlock';
@@ -8,18 +9,25 @@ import { IPageStore } from '../../Stores/PageStore';
 import { observer, inject } from 'mobx-react';
 
 interface Props {
-    pagesStore: IPageStore
+    pageStore?: IPageStore
 }
 
 @inject('pageStore')
 @observer
-class PageHome extends Component <Props> {
-    
+class PageHome extends Component<Props & RouteProps> {
+
+    componentDidMount(){
+        const pageData = {
+            pathname: this.props.location.pathname,
+            search  : this.props.location.search,
+            hash    : this.props.location.hash,
+            state   : this.props.location.state,
+        };
+        this.props.pageStore.setData(pageData);
+    }
+
     render() {
         
-        // const {} = this.props.pagesStore
-
-        console.log(this.props);
         return (
             <>
                 <Slider />
