@@ -15,20 +15,17 @@ export default class CatalogBlock extends Component<Props> {
 
     @observable firstTwoPosts = [];
 
-    async componentWillMount() {
-
+    async componentDidMount() {
         await this.props.postsStore.getAllPosts();
-
         const { postsList } = this.props.postsStore;
         let counter = 0;
 
         for (const id in postsList) {
             if (counter > 1) break;
 
-
             if (postsList.hasOwnProperty(id)) {
                 const post = postsList[id];
-                
+
                 this.firstTwoPosts.push(post.id);
             }
             counter++;
@@ -36,17 +33,16 @@ export default class CatalogBlock extends Component<Props> {
     }
 
     render() {
-        console.log(this.firstTwoPosts)
+        const CatalogItems = this.firstTwoPosts.map((id, index) => (
+            index % 2 == 0
+                ? <CatalogItem key={index} postID={id} />
+                : <CatalogItem key={index} inverse='catalog-item--inverse' postID={id} />
+        ));
         return (
             <div id="catalog-block" className="catalog-block">
-                {
-                    this.firstTwoPosts ? this.firstTwoPosts.map((id, index) => (
-                        index % 2 == 0 
-                        ? <CatalogItem key={index} postId={id} /> 
-                        : <CatalogItem key={index} inverse='catalog-item--inverse' postId={id} />
-                    ))
-                    : ''
-                }
+                {/* {CatalogItems} */}
+                <CatalogItem key={1} postID={2} />
+                <CatalogItem key={2} inverse='catalog-item--inverse' postID={4} />
             </div>
         );
     }

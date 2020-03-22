@@ -1,7 +1,24 @@
 import React, { Component } from 'react';
 import ContextItem from '../ContextItem';
+import { IPostStore, IPostsStore } from '../../Stores/PostsStore';
+import { inject, observer } from 'mobx-react';
+import { observable } from 'mobx';
 
-export default class VideoBlock extends Component {
+interface Props {
+    postsStore?: IPostsStore,
+    postStore?: IPostStore
+}
+
+@inject('postsStore')
+@observer
+export default class VideoBlock extends Component<Props> {
+
+    @observable postStore = {} as IPostStore;
+
+    async componentDidMount() {
+        this.postStore = await this.props.postsStore.getPost(12);
+    }
+
     render() {
         return (
             <div className="video-block">
@@ -9,7 +26,7 @@ export default class VideoBlock extends Component {
                     <img src="img/video-image.png" alt="" />
                 </div>
                 <div className="video-block__inner">
-                    <ContextItem blockClass='context-item--light' buttonClass="button_with-border" />
+                    <ContextItem contextData={this.postStore} blockClass='context-item--light' buttonClass="button_with-border" />
                 </div>
             </div>
         );

@@ -1,27 +1,48 @@
 import React, { Component } from 'react';
 import ContextItem from '../ContextItem';
+import { IPostsStore, IPostStore } from '../../Stores/PostsStore';
+import { inject, observer } from "mobx-react";
+import { observable } from 'mobx';
 
 interface Props {
+    postsStore?: IPostsStore,
+    postStore?: IPostStore,
     inverse?: string,
-    postId?: number,
+    postID?: number,
 }
 
+@inject('postsStore')
+@observer
 export default class CatalogItem extends Component<Props>{
+
+    @observable postStore = {} as IPostStore;
+
+    async componentDidMount() {
+        const { postID } = this.props;
+
+        this.postStore = await this.props.postsStore.getPost(postID);
+    }
 
     render() {
         const { inverse } = this.props;
+        const {
+            id,
+            title,
+            url
+        } = this.postStore;
+
         return (
             <div className={`catalog-item ${inverse ? inverse : ''}`}>
                 <div className="catalog-item__content">
-                    <ContextItem buttonClass="button_light" />
+                    <ContextItem contextData={this.postStore} buttonClass="button_light" />
                     <div className="catalog-item__number">
-                        01 <span></span>
+                        {id} <span></span>
                     </div>
                 </div>
                 <div className="catalog-item__image">
-                    <img src="img/catalog-item-1.jpg" alt="image" />
+                    <img src={url} alt="image" />
                 </div>
-                <div className="catalog-item__title-decor">furniture</div>
+                <div className="catalog-item__title-decor">{title}</div>
             </div>
         );
     }
