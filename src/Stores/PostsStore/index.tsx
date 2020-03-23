@@ -1,5 +1,5 @@
 import { observable, action } from 'mobx';
-import ImagesStore, {IImagesStore} from '../ImagesStore';
+import ImagesStore, { IImagesStore } from '../ImagesStore';
 
 export interface IPostsStore {
     postsList: IPostsList,
@@ -29,14 +29,14 @@ export interface IPostResponce {
 
 export default class PostsStore implements IPostsStore {
 
-    @observable postsList: IPostsList = {};
+    @observable postsList = {} as IPostsList;
     imagesStore: IImagesStore = new ImagesStore();
 
     @action async getAllPosts() {
-
+        console.log('async getAllPosts');
         const response = await fetch('https://jsonplaceholder.typicode.com/posts');
 
-        if(!this.imagesStore.imagesList) await this.imagesStore.getAllImages();
+        if (!this.imagesStore.imagesList) await this.imagesStore.getAllImages();
         const posts = await response.json();
         if (posts) {
             posts.forEach(async (post: IPostResponce) => {
@@ -45,7 +45,7 @@ export default class PostsStore implements IPostsStore {
         }
     }
 
-    async formatPostResponce(data: IPostResponce) {
+    @action async formatPostResponce(data: IPostResponce) {
         const imageData = await this.imagesStore.getImage(data.id);
 
         return {
